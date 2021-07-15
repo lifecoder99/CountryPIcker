@@ -38,11 +38,16 @@ class CountryCodePicker(context: Context, attrs: AttributeSet) : LinearLayout(co
             dialog = CountryCodeDialog(context) { country ->
                 selectedCountryTv.text = "${country.name}"
                 flagImg.setImageDrawable(ContextCompat.getDrawable(context, country.flagId))
+                setOnCountryChangeListener(country)
                 dialog.dismiss()
             }
             dialog.show()
         }
+        fillData()
+    }
 
+    fun setOnCountryChangeListener(country: Country): Country {
+        return country
     }
 
     private fun fillData() {
