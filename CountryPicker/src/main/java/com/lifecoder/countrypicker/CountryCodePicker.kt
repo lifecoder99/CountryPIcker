@@ -35,20 +35,20 @@ class CountryCodePicker(val _context: Context, val attrs: AttributeSet) : Linear
     }
 
     private fun init() {
-        val view = View.inflate(context, R.layout.country_code_picker, this)
+        val view = View.inflate(_context, R.layout.country_code_picker, this)
         mainLytCountryPicker = view.findViewById(R.id.main_lyt_country_picker)
         flagImg = view.findViewById<ImageView>(R.id.flag_imv)
         arrow_imv = view.findViewById<ImageView>(R.id.arrow_imv)
         selectedCountryTv = view.findViewById<TextView>(R.id.selected_country_tv)
         mainLytCountryPicker.setOnClickListener {
-            dialog = CountryCodeDialog(context) { country ->
+            dialog = CountryCodeDialog(_context) { country ->
                 if(isShowCountryCode){
                     selectedCountryTv.text = country.dial_code
                 }else{
                     selectedCountryTv.text= country.name
                 }
 
-                flagImg.setImageDrawable(ContextCompat.getDrawable(context, country.flagId))
+                flagImg.setImageDrawable(ContextCompat.getDrawable(_context, country.flagId))
                 dialog.dismiss()
                 _callbackSelectCountry?.let {
                     it.selectedCountry(country)
@@ -101,7 +101,7 @@ class CountryCodePicker(val _context: Context, val attrs: AttributeSet) : Linear
     }
 
     private fun applyCustomProperty(attrs: AttributeSet) {
-        val theme = context.theme
+        val theme = _context.theme
         val a = theme.obtainStyledAttributes(attrs, R.styleable.CountryCodePicker, 0, 0)
         try {
            val defaultCountryNameCode = a.getString(R.styleable.CountryCodePicker_ccp_defaultNameCode)
@@ -122,7 +122,7 @@ class CountryCodePicker(val _context: Context, val attrs: AttributeSet) : Linear
                 if(countryArray[i].code.contains(defaultCountryNameCode.toString(), true)){
                     countryArray[i].apply{
                         selectCountryData = this
-                        flagImg.setImageDrawable(ContextCompat.getDrawable(context,flagId))
+                        flagImg.setImageDrawable(ContextCompat.getDrawable(_context,flagId))
                         if(isShowCountryCode){
                             selectedCountryTv.text="$dial_code"
                         }else{
