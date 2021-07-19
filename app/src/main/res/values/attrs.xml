@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="CountryCodePicker">
         <attr format="integer" name="ccp_defaultCode"/>
-        <attr format="color" name="ccp_textColor"/>
+     <!--   <attr format="color" name="ccp_textColor"/>
         <attr format="color" name="ccp_backgroundColor"/>
         <attr format="dimension" name="ccp_textSize"/>
         <attr format="string" name="ccp_textFont"/>
@@ -19,7 +19,7 @@
         <attr format="boolean" name="ccp_hidePhoneCode"/>
         <attr format="boolean" name="ccp_enableHint"/>
         <attr format="boolean" name="ccp_enablePhoneAutoFormatter"/>
-        <attr format="boolean" name="ccp_setCountryByTimeZone"/>
+        <attr format="boolean" name="ccp_setCountryByTimeZone"/>-->
         <!--For dialog-->
         <attr format="color" name="ccp_dialogTextColor"/>
     </declare-styleable>

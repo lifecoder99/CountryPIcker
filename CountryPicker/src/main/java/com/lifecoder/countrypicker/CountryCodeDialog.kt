@@ -18,7 +18,7 @@ class CountryCodeDialog(context: Context, val callback: (Country) -> Unit) : Dia
     private val TAG = CountryCodeDialog::class.java.simpleName
     private lateinit var binding: CountryCodePickerDialogBinding
     private lateinit var adapter: CountryCodeAdapter
-    val filterList: MutableList<Country> = mutableListOf()
+   private val filterList: MutableList<Country> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)

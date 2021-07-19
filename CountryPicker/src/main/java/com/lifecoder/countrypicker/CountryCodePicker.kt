@@ -10,12 +10,13 @@ import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.lifecoder.countrypicker.databinding.CountryCodePickerBinding
 import java.io.IOException
+import java.lang.Exception
 import java.util.*
 
 /**
  * Created by Arun on 07-07-2021
  */
-class CountryCodePicker(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
+class CountryCodePicker(context: Context, val attrs: AttributeSet) : LinearLayout(context, attrs) {
     private val TAG = CountryCodePicker::class.java.simpleName
 
     private lateinit var mBinding: CountryCodePickerBinding
@@ -24,6 +25,8 @@ class CountryCodePicker(context: Context, attrs: AttributeSet) : LinearLayout(co
     private lateinit var flagImg: ImageView
     private lateinit var selectedCountryTv: TextView
     private lateinit var dialog: CountryCodeDialog
+    private var _callbackSelectCountry: CallbackSelectCountry? = null
+    var selectCountryData:Country? =null
 
     init {
         init()
@@ -38,17 +41,24 @@ class CountryCodePicker(context: Context, attrs: AttributeSet) : LinearLayout(co
             dialog = CountryCodeDialog(context) { country ->
                 selectedCountryTv.text = "${country.name}"
                 flagImg.setImageDrawable(ContextCompat.getDrawable(context, country.flagId))
-                setOnCountryChangeListener(country)
                 dialog.dismiss()
+                _callbackSelectCountry?.let {
+                    it.selectedCountry(country)
+                    selectCountryData= country
+                }
+
             }
             dialog.show()
         }
         fillData()
+        applyCustomProperty(attrs)
+
     }
 
-    fun setOnCountryChangeListener(country: Country): Country {
-        return country
+    fun setOnCountryChangeListener(callbackSelectCountry: CallbackSelectCountry) {
+        _callbackSelectCountry = callbackSelectCountry
     }
+
 
     private fun fillData() {
         val country = getJsonDataFromAsset(context, "countrycodes.json")
@@ -80,6 +90,26 @@ class CountryCodePicker(context: Context, attrs: AttributeSet) : LinearLayout(co
             return null
         }
         return jsonString
+    }
+
+    private fun applyCustomProperty(attrs: AttributeSet) {
+        val theme = context.theme
+        val a = theme.obtainStyledAttributes(attrs, R.styleable.CountryCodePicker, 0, 0)
+        try {
+           val defaultCountryNameCode = a.getString(R.styleable.CountryCodePicker_ccp_defaultNameCode)
+            for(i in countryArray.indices){
+                if(countryArray[i].code.contains(defaultCountryNameCode.toString(), true)){
+                    countryArray[i].apply{
+                        selectCountryData = this
+                        selectedCountryTv.text=name
+                        flagImg.setImageDrawable(ContextCompat.getDrawable(context,flagId))
+                    }
+
+                }
+            }
+        }catch (ex:Exception){
+
+        }
     }
 
     companion object {
