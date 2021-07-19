@@ -16,7 +16,7 @@ import java.util.*
 /**
  * Created by Arun on 07-07-2021
  */
-class CountryCodePicker(context: Context, val attrs: AttributeSet) : LinearLayout(context, attrs) {
+class CountryCodePicker(val _context: Context, val attrs: AttributeSet) : LinearLayout(_context, attrs) {
     private val TAG = CountryCodePicker::class.java.simpleName
 
     private lateinit var mBinding: CountryCodePickerBinding
@@ -69,7 +69,7 @@ class CountryCodePicker(context: Context, val attrs: AttributeSet) : LinearLayou
 
 
     private fun fillData() {
-        val country = getJsonDataFromAsset(context, "countrycodes.json")
+        val country = getJsonDataFromAsset(_context, "countrycodes.json")
         val gson = Gson()
         countryArray =
             gson.fromJson(country, Array<Country>::class.java)
@@ -78,12 +78,12 @@ class CountryCodePicker(context: Context, val attrs: AttributeSet) : LinearLayou
                 if (countryArray[i].code.lowercase(Locale.ENGLISH) == "do") resources.getIdentifier(
                     countryArray[i].code.lowercase(Locale.ENGLISH) + "1",
                     "drawable",
-                    context.packageName
+                    _context.packageName
                 )
                 else resources.getIdentifier(
                     countryArray[i].code.lowercase(Locale.ENGLISH),
                     "drawable",
-                    context.packageName
+                    _context.packageName
                 )
             countryArray[i].flagId = drawableId
         }
