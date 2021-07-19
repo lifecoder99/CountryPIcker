@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/main_lyt_country_picker"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_lyt_country_picker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/flag_imv"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/ac"/>
-
-        <TextView
-            android:id="@+id/selected_country_tv"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/_14sdp"
-            android:text="Select Country"
-            android:paddingHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/arrow_imv"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_arrow_drop_down_24"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
-    </layout>
+            <ImageView
+                android:id="@+id/flag_imv"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_25sdp"
+                />
+
+            <TextView
+                android:id="@+id/selected_country_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:text="Select Country"
+                android:textSize="@dimen/_14sdp" />
+
+            <ImageView
+                android:id="@+id/arrow_imv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

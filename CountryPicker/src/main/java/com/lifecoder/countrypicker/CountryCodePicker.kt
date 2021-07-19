@@ -23,10 +23,12 @@ class CountryCodePicker(context: Context, val attrs: AttributeSet) : LinearLayou
 
     private lateinit var mainLytCountryPicker: LinearLayout
     private lateinit var flagImg: ImageView
+    private lateinit var arrow_imv: ImageView
     private lateinit var selectedCountryTv: TextView
     private lateinit var dialog: CountryCodeDialog
     private var _callbackSelectCountry: CallbackSelectCountry? = null
     var selectCountryData:Country? =null
+    private var isShowCountryCode:Boolean =false
 
     init {
         init()
@@ -36,10 +38,16 @@ class CountryCodePicker(context: Context, val attrs: AttributeSet) : LinearLayou
         val view = View.inflate(context, R.layout.country_code_picker, this)
         mainLytCountryPicker = view.findViewById(R.id.main_lyt_country_picker)
         flagImg = view.findViewById<ImageView>(R.id.flag_imv)
+        arrow_imv = view.findViewById<ImageView>(R.id.arrow_imv)
         selectedCountryTv = view.findViewById<TextView>(R.id.selected_country_tv)
         mainLytCountryPicker.setOnClickListener {
             dialog = CountryCodeDialog(context) { country ->
-                selectedCountryTv.text = "${country.name}"
+                if(isShowCountryCode){
+                    selectedCountryTv.text = country.dial_code
+                }else{
+                    selectedCountryTv.text= country.name
+                }
+
                 flagImg.setImageDrawable(ContextCompat.getDrawable(context, country.flagId))
                 dialog.dismiss()
                 _callbackSelectCountry?.let {
@@ -97,12 +105,31 @@ class CountryCodePicker(context: Context, val attrs: AttributeSet) : LinearLayou
         val a = theme.obtainStyledAttributes(attrs, R.styleable.CountryCodePicker, 0, 0)
         try {
            val defaultCountryNameCode = a.getString(R.styleable.CountryCodePicker_ccp_defaultNameCode)
+            isShowCountryCode = a.getBoolean(R.styleable.CountryCodePicker_ccp_showCountryCode,false)
+           val isHideDropDown = a.getBoolean(R.styleable.CountryCodePicker_ccp_hideDropDown,false)
+           val isHideFlag = a.getBoolean(R.styleable.CountryCodePicker_ccp_hideFlag,false)
+            if(isHideDropDown){
+                arrow_imv.visibility =View.GONE
+            }else{
+                arrow_imv.visibility = View.VISIBLE
+            }
+            if(isHideFlag){
+                flagImg.visibility = View.GONE
+            }else{
+                flagImg.visibility = View.VISIBLE
+            }
             for(i in countryArray.indices){
                 if(countryArray[i].code.contains(defaultCountryNameCode.toString(), true)){
                     countryArray[i].apply{
                         selectCountryData = this
-                        selectedCountryTv.text=name
                         flagImg.setImageDrawable(ContextCompat.getDrawable(context,flagId))
+                        if(isShowCountryCode){
+                            selectedCountryTv.text="$dial_code"
+                        }else{
+                            selectedCountryTv.text=name
+                        }
+
+
                     }
 
                 }

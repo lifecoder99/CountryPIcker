@@ -18,6 +18,9 @@
     <com.lifecoder.countrypicker.CountryCodePicker
         android:id="@+id/pickerCountry"
         app:ccp_defaultNameCode="IN"
+        app:ccp_showCountryCode="true"
+        app:ccp_hideDropDown="true"
+        app:ccp_hideFlag="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"

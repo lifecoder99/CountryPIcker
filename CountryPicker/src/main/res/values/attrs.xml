@@ -2,6 +2,9 @@
 <resources>
     <declare-styleable name="CountryCodePicker">
         <attr format="string" name="ccp_defaultNameCode"/>
+        <attr format="boolean" name="ccp_showCountryCode"/>
+        <attr format="boolean" name="ccp_hideDropDown"/>
+        <attr format="boolean" name="ccp_hideFlag"/>
         <!--  <attr format="integer" name="ccp_defaultCode"/>
         <attr format="color" name="ccp_textColor"/>
          <attr format="color" name="ccp_backgroundColor"/>
