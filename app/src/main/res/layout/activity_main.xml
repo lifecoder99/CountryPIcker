@@ -16,12 +16,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 <com.lifecoder.countrypicker.CountryPicker
+    android:id="@+id/v1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
     app:ccp_hideFlag="false"
     app:ccp_hideDropDown="false"
     />
+
+    <com.lifecoder.countrypicker.StatePicker
+        android:layout_marginTop="@dimen/_20sdp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/v1"
+        app:ccp_hideFlag="false"
+        app:ccp_hideDropDown="false"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

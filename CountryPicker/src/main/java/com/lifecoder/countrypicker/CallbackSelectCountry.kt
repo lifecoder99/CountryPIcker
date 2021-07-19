@@ -12,3 +12,7 @@ interface CallbackSelectCountry {
 interface CallbackCountrySelected{
     fun selectedCountry(country: CountriesStates.Country)
 }
+
+interface CallbackSelectState {
+    fun selectedState(state: CountriesStates.Country.State)
+}

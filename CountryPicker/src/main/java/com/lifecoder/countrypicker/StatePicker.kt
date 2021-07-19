@@ -6,25 +6,24 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.google.gson.Gson
 import com.lifecoder.countrypicker.databinding.CountryCodePickerBinding
 import com.nbt.blytics.modules.editaddress.model.CountriesStates
-import java.io.IOException
 
 /**
  * Created by Arun on 07-07-2021
  */
-class CountryPicker(val _context: Context, val attrs: AttributeSet) :
+class StatePicker(val _context: Context, val attrs: AttributeSet) :
     LinearLayout(_context, attrs) {
-    private val TAG = CountryPicker::class.java.simpleName
+    private val TAG = StatePicker::class.java.simpleName
 
     private lateinit var mBinding: CountryCodePickerBinding
 
     private lateinit var mainLytCountryPicker: LinearLayout
     private lateinit var arrow_imv: ImageView
     private lateinit var selectedCountryTv: TextView
-    private lateinit var dialog: CountryDialog
-    private var _callbackSelectCountry: CallbackCountrySelected? = null
+    private lateinit var dialog: StateDialog
+    private var _callbackSelectState: CallbackSelectState? = null
+    var selectStateData: CountriesStates.Country.State? = null
     private var isShowCountryCode: Boolean = false
 
     init {
@@ -37,44 +36,30 @@ class CountryPicker(val _context: Context, val attrs: AttributeSet) :
         arrow_imv = view.findViewById<ImageView>(R.id.arrow_imv)
         selectedCountryTv = view.findViewById<TextView>(R.id.selected_country_tv)
         mainLytCountryPicker.setOnClickListener {
-            dialog = CountryDialog(_context) { country ->
-                selectedCountryTv.text = country.countryName
+            dialog = StateDialog(_context) { state ->
+                selectedCountryTv.text = state.stateName
                 dialog.dismiss()
-                _callbackSelectCountry?.let {
-                    it.selectedCountry(country)
-
+                _callbackSelectState?.let {
+                    it.selectedState(state)
                 }
-                selectCountryStateData = country
+                selectStateData = state
+
             }
             dialog.show()
         }
-        fillData()
+
         applyCustomProperty(attrs)
 
     }
 
-    fun setOnCountryChangeListener(callbackCountrySelected: CallbackCountrySelected) {
-        _callbackSelectCountry = callbackCountrySelected
+    fun setOnCountryChangeListener(callbackSelectState: CallbackSelectState) {
+        _callbackSelectState = callbackSelectState
     }
 
 
-    private fun fillData() {
-        val gson = Gson()
-        val countryStateJson = getJsonDataFromAsset(_context, "countries_states_city.json")
-        countryState =
-            gson.fromJson(countryStateJson, CountriesStates::class.java)
-    }
 
-    private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
-        val jsonString: String
-        try {
-            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            return null
-        }
-        return jsonString
-    }
+
+
 
     private fun applyCustomProperty(attrs: AttributeSet) {
         val theme = _context.theme
@@ -113,9 +98,5 @@ class CountryPicker(val _context: Context, val attrs: AttributeSet) :
         }
     }
 
-    companion object {
-        lateinit var countryState: CountriesStates
-        var selectCountryStateData: CountriesStates.Country? = null
 
-    }
 }

@@ -55,8 +55,8 @@ class CountryCodePicker(val _context: Context, val attrs: AttributeSet) : Linear
                 dialog.dismiss()
                 _callbackSelectCountry?.let {
                     it.selectedCountry(country)
-                    selectCountryData= country
                 }
+                selectCountryData= country
 
             }
             dialog.show()
