@@ -8,7 +8,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
+import com.lifecoder.countrypicker.CountryPicker.Companion.countryState
 import com.lifecoder.countrypicker.databinding.CountryCodePickerBinding
+import com.lifecoder.countrypicker.models.Country
+import com.nbt.blytics.modules.editaddress.model.CountriesStates
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
@@ -27,7 +30,7 @@ class CountryCodePicker(val _context: Context, val attrs: AttributeSet) : Linear
     private lateinit var selectedCountryTv: TextView
     private lateinit var dialog: CountryCodeDialog
     private var _callbackSelectCountry: CallbackSelectCountry? = null
-    var selectCountryData:Country? =null
+    var selectCountryData: Country? =null
     private var isShowCountryCode:Boolean =false
 
     init {
@@ -87,6 +90,8 @@ class CountryCodePicker(val _context: Context, val attrs: AttributeSet) : Linear
                 )
             countryArray[i].flagId = drawableId
         }
+
+
     }
 
     private fun getJsonDataFromAsset(context: Context, fileName: String): String? {

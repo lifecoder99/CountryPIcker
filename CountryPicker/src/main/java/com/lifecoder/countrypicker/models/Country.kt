@@ -1,4 +1,4 @@
-package com.lifecoder.countrypicker
+package com.lifecoder.countrypicker.models
 
 /**
  * Created by Arun on 07-07-2021

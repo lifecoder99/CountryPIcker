@@ -2,9 +2,9 @@ package com.lifecoder.countrypicker
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.lifecoder.countrypicker.models.Country
 import java.io.IOException
 
 
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val picker = findViewById<CountryCodePicker>(R.id.pickerCountry)
+       /* val picker = findViewById<CountryCodePicker>(R.id.pickerCountry)
         picker.setOnCountryChangeListener(object:CallbackSelectCountry{
             override fun selectedCountry(country: Country) {
                 Toast.makeText(this@MainActivity, country.name,Toast.LENGTH_SHORT).show()
@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
         })
         picker.selectCountryData?.let {
             Toast.makeText(this@MainActivity, it.name,Toast.LENGTH_SHORT).show()
-        }
+        }*/
+
+
 
 
         /* val country = getJsonDataFromAsset(this, "countrycodes.json")

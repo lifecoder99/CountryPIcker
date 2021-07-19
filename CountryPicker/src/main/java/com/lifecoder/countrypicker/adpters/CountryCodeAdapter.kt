@@ -1,4 +1,4 @@
-package com.lifecoder.countrypicker
+package com.lifecoder.countrypicker.adpters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.lifecoder.countrypicker.models.Country
 import com.lifecoder.countrypicker.R
 import com.lifecoder.countrypicker.databinding.RowCountryAdpterBinding
 
 /**
  * Created by Arun on 07-07-2021
  */
-class CountryCodeAdapter (val context:Context,val  list:MutableList<Country>, val callback:(Int)->Unit):RecyclerView.Adapter<CountryCodeAdapter.CountryViewHolder>(){
+class CountryCodeAdapter (val context:Context, val  list:MutableList<Country>, val callback:(Int)->Unit):RecyclerView.Adapter<CountryCodeAdapter.CountryViewHolder>(){
    inner class CountryViewHolder(val binding: RowCountryAdpterBinding):RecyclerView.ViewHolder(binding.root) {
 
     }
